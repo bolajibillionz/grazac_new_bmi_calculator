@@ -4,8 +4,9 @@ import 'package:flutter/material.dart';
 
 class CardContent extends StatelessWidget {
   final String label;
+  final Color iconColor;
   final IconData cardIcons;
-  CardContent({required this.label, required this.cardIcons});
+  CardContent({required this.label, required this.cardIcons, required this.iconColor,});
 
   @override
   Widget build(BuildContext context) {
@@ -14,6 +15,7 @@ class CardContent extends StatelessWidget {
       children: [
         Icon(
           cardIcons,
+          color: iconColor,
           size: 80,
         ),
         SizedBox(

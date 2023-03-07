@@ -10,6 +10,10 @@ class InputPage extends StatefulWidget {
 }
 
 class _InputPageState extends State<InputPage> {
+  Gender? selectedGender;
+  int height = 183;
+  int weight = 74;
+  int age = 19;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -17,6 +21,7 @@ class _InputPageState extends State<InputPage> {
           title: Text('BMI CALCULATOR'),
         ),
         body: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Expanded(
               child: Row(
@@ -24,18 +29,37 @@ class _InputPageState extends State<InputPage> {
                   Expanded(
                     child: CardContainer(
                       onTap: () {
-                        print('this is Lagos');
+                        setState(() {
+                          selectedGender = Gender.male;
+                        });
                       },
-                      cardColour: kActiveCardColor,
+                      cardColour: selectedGender == Gender.male
+                          ? kActiveCardColor
+                          : kInactiveCardColor,
                       containerChild: CardContent(
-                          cardIcons: FontAwesomeIcons.mars, label: 'MALE'),
+                          iconColor: selectedGender == Gender.male
+                              ? Colors.white
+                              : kInactiveTextColor,
+                          cardIcons: FontAwesomeIcons.mars,
+                          label: 'MALE'),
                     ),
                   ),
                   Expanded(
                     child: CardContainer(
-                      cardColour: kActiveCardColor,
+                      onTap: () {
+                        setState(() {
+                          selectedGender = Gender.female;
+                        });
+                      },
+                      cardColour: selectedGender == Gender.female
+                          ? kActiveCardColor
+                          : kInactiveCardColor,
                       containerChild: CardContent(
-                          cardIcons: FontAwesomeIcons.venus, label: 'FEMALE'),
+                          iconColor: selectedGender == Gender.female
+                              ? Colors.white
+                              : kInactiveTextColor,
+                          cardIcons: FontAwesomeIcons.venus,
+                          label: 'FEMALE'),
                     ),
                   ),
                 ],
@@ -44,6 +68,51 @@ class _InputPageState extends State<InputPage> {
             Expanded(
               child: CardContainer(
                 cardColour: kActiveCardColor,
+                onTap: () {},
+                containerChild: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      'HEIGHT',
+                      style: kLabelTextStyle,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.baseline,
+                      textBaseline: TextBaseline.alphabetic,
+                      children: [
+                        Text(
+                          height.toString(),
+                          style: kNumberTextStyle,
+                        ),
+                        Text('cm', style: kLabelTextStyle)
+                      ],
+                    ),
+                    SliderTheme(
+                      data: SliderTheme.of(context).copyWith(
+                          activeTrackColor: Colors.white,
+                          thumbColor: Color(0xffeb1555),
+                          inactiveTrackColor: Color(0xff8d8e98),
+                          overlayColor: Color(0x29eb1555),
+                          thumbShape:
+                              RoundSliderThumbShape(enabledThumbRadius: 15),
+                          overlayShape:
+                              RoundSliderOverlayShape(overlayRadius: 30)),
+                      child: Slider(
+                        value: height.toDouble(),
+                        onChanged: (double newValue) {
+                          // print(newValue);
+                          setState(() {
+                            height = newValue.round();
+                            print(height);
+                          });
+                        },
+                        min: 120.0,
+                        max: 220.0,
+                      ),
+                    )
+                  ],
+                ),
               ),
             ),
             Expanded(
@@ -52,11 +121,79 @@ class _InputPageState extends State<InputPage> {
                   Expanded(
                     child: CardContainer(
                       cardColour: kActiveCardColor,
+                      containerChild: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            'WEIGHT',
+                            style: kLabelTextStyle,
+                          ),
+                          Text(weight.toString(), style: kNumberTextStyle),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              floatingButton(
+                                iconName: FontAwesomeIcons.minus,
+                                onPressed: () {
+                                  setState(() {
+                                    weight--;
+                                  });
+                                },
+                              ),
+                              SizedBox(
+                                width: 10,
+                              ),
+                              floatingButton(
+                                iconName: FontAwesomeIcons.plus,
+                                onPressed: () {
+                                  setState(() {
+                                    weight++;
+                                  });
+                                },
+                              )
+                            ],
+                          )
+                        ],
+                      ),
                     ),
                   ),
                   Expanded(
                     child: CardContainer(
                       cardColour: kActiveCardColor,
+                      containerChild: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            'AGE',
+                            style: kLabelTextStyle,
+                          ),
+                          Text(age.toString(), style: kNumberTextStyle),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              floatingButton(
+                                iconName: FontAwesomeIcons.minus,
+                                onPressed: () {
+                                  setState(() {
+                                    age--;
+                                  });
+                                },
+                              ),
+                              SizedBox(
+                                width: 10,
+                              ),
+                              floatingButton(
+                                iconName: FontAwesomeIcons.plus,
+                                onPressed: () {
+                                  setState(() {
+                                    age++;
+                                  });
+                                },
+                              )
+                            ],
+                          )
+                        ],
+                      ),
                     ),
                   ),
                 ],
@@ -64,5 +201,17 @@ class _InputPageState extends State<InputPage> {
             ),
           ],
         ));
+  }
+
+  FloatingActionButton floatingButton(
+      {required IconData iconName, required void Function()? onPressed}) {
+    return FloatingActionButton(
+      onPressed: onPressed,
+      backgroundColor: Color(0xff4c4f5e),
+      child: Icon(
+        iconName,
+        color: Colors.white,
+      ),
+    );
   }
 }
