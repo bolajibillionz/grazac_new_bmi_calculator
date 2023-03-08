@@ -11,7 +11,16 @@ const kLabelTextStyle = TextStyle(
 );
 const kBottomTextStyle = TextStyle(
   fontSize: 25,
- fontWeight: FontWeight.bold,
+  fontWeight: FontWeight.bold,
+);
+const kTitleTextStyle = TextStyle(
+  fontSize: 50.0,
+  fontWeight: FontWeight.bold,
+);
+const kResultTextStyle = TextStyle(
+  fontSize: 22.0,
+  color: Color(0xff24d876),
+  fontWeight: FontWeight.bold,
 );
 
 const kNumberTextStyle = TextStyle(fontSize: 45, fontWeight: FontWeight.w900);

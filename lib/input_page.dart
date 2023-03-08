@@ -200,20 +200,30 @@ class _InputPageState extends State<InputPage> {
               ],
             ),
           ),
-          BottomButton()
+          BottomButton(
+            onTap: () {
+              Navigator.pushNamed(context, 'result');
+            },
+            buttonText: 'CALCULATE BMI',
+          )
         ],
       ),
     );
   }
 
-  FloatingActionButton floatingButton(
+  GestureDetector floatingButton(
       {required IconData iconName, required void Function()? onPressed}) {
-    return FloatingActionButton(
-      onPressed: onPressed,
-      backgroundColor: Color(0xff4c4f5e),
-      child: Icon(
-        iconName,
-        color: Colors.white,
+    return GestureDetector(
+      onTap: onPressed,
+      child: Container(
+        height: 55,
+        width: 55,
+        decoration:
+            BoxDecoration(color: Color(0xff4c4f5e), shape: BoxShape.circle),
+        child: Icon(
+          iconName,
+          color: Colors.white,
+        ),
       ),
     );
   }
