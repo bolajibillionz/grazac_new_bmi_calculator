@@ -23,6 +23,14 @@ const kResultTextStyle = TextStyle(
   fontWeight: FontWeight.bold,
 );
 
+const kBMITextStyle = TextStyle(
+  fontSize: 100.0,
+  fontWeight: FontWeight.bold,
+);
+const kBodyTextStyle = TextStyle(
+  fontSize: 22.0,
+);
+
 const kNumberTextStyle = TextStyle(fontSize: 45, fontWeight: FontWeight.w900);
 
 enum Gender { male, female }

@@ -36,7 +36,15 @@ class ResultPage extends StatelessWidget {
                       'NORMAL',
                       style: kResultTextStyle,
                     ),
-                    
+                    Text(
+                      '18.2',
+                      style: kBMITextStyle,
+                    ),
+                    Text(
+                      'You are too fat, go to the gym',
+                      style: kBodyTextStyle,
+                      textAlign: TextAlign.center,
+                    )
                   ],
                 ),
               )),
