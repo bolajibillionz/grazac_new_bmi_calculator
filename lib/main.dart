@@ -10,13 +10,10 @@ class BMICalculator extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData.dark().copyWith(
-          appBarTheme: AppBarTheme(backgroundColor: Color(0xff0a0e21)),
-          scaffoldBackgroundColor: Color(0xff0a0e21)),
-      routes: {
-        'input': (context) => InputPage(),
-        'result': (context) => ResultPage()
-      },
-      initialRoute: 'input',
+        appBarTheme: AppBarTheme(backgroundColor: Color(0xff0a0e21)),
+        scaffoldBackgroundColor: Color(0xff0a0e21),
+      ),
+      home: InputPage(),
     );
   }
 }

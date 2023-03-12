@@ -4,7 +4,15 @@ import 'reuseable_card.dart';
 import 'package:flutter/material.dart';
 
 class ResultPage extends StatelessWidget {
-  const ResultPage({super.key});
+  final String result;
+  final String bmiValue;
+  final String remark;
+
+  ResultPage({
+    required this.bmiValue,
+    required this.remark,
+    required this.result,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -33,15 +41,15 @@ class ResultPage extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Text(
-                      'NORMAL',
+                      result.toUpperCase(),
                       style: kResultTextStyle,
                     ),
                     Text(
-                      '18.2',
+                      bmiValue,
                       style: kBMITextStyle,
                     ),
                     Text(
-                      'You are too fat, go to the gym',
+                      remark,
                       style: kBodyTextStyle,
                       textAlign: TextAlign.center,
                     )
@@ -49,7 +57,9 @@ class ResultPage extends StatelessWidget {
                 ),
               )),
           BottomButton(
-            onTap: () {},
+            onTap: () {
+              Navigator.pop(context);
+            },
             buttonText: 'RE-CALCULATE',
           )
         ],

@@ -3,7 +3,9 @@ import 'card_content.dart';
 import 'bottom_button.dart';
 import 'reuseable_card.dart';
 import 'package:flutter/material.dart';
+import 'package:grazac_new_bmi_calculator/result_page.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:grazac_new_bmi_calculator/calculator_brain.dart';
 
 class InputPage extends StatefulWidget {
   @override
@@ -202,7 +204,19 @@ class _InputPageState extends State<InputPage> {
           ),
           BottomButton(
             onTap: () {
-              Navigator.pushNamed(context, 'result');
+              print(height);
+              print(weight);
+              CalculatorBrain calculate =
+                  CalculatorBrain(height: height, weight: weight);
+
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => ResultPage(
+                            remark: calculate.remark(),
+                            result: calculate.getResult(),
+                            bmiValue: calculate.calculateBMI(),
+                          )));
             },
             buttonText: 'CALCULATE BMI',
           )
